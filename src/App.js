@@ -1,24 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState([]);
+
+  const sendMessages = (event) => {
+    // all sendMessage logic goes here
+    event.preventDefault();
+    setMessages([...messages, input]);
+    setInput("");
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>hello world</h1>
+
+      <form>
+        {/* input field */}
+        <input
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+        />
+
+        {/* button */}
+        <button type="submit" onClick={sendMessages}>
+          Send Message
+        </button>
+      </form>
+
+      {/* message themselves */}
+      {messages.map((message) => {
+        return <p>{message}</p>;
+      })}
     </div>
   );
 }
