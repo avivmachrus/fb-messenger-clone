@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Button, FormControl, InputLabel, Input } from "@material-ui/core";
 import "./App.css";
 import Message from "./components/Message/Message";
+
+import firebase from "firebase";
 import db from "./firebase";
+
+import FlipMove from "react-flip-move";
 
 function App() {
   const [input, setInput] = useState("");
@@ -12,16 +16,27 @@ function App() {
   const sendMessages = (event) => {
     // all sendMessage logic goes here
     event.preventDefault();
-    setMessages([...messages, { username: username, text: input }]);
+    // setMessages([...messages, { username: username, text: input }]);
+
+    db.collection("messages").add({
+      message: input,
+      username: username,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
     setInput("");
   };
 
   const inputOnChange = (event) => setInput(event.target.value);
 
+  // grab data from firebase
   useEffect(() => {
-    db.collection("messages").onSnapshot((snapshot) => {
-      setMessages(snapshot.docs.map((doc) => doc.data()));
-    });
+    db.collection("messages")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setMessages(
+          snapshot.docs.map((doc) => ({ id: doc.id, message: doc.data() }))
+        );
+      });
   }, []);
 
   useEffect(() => {
@@ -52,10 +67,12 @@ function App() {
         </FormControl>
       </form>
 
-      {/* message themselves */}
-      {messages.map((message) => {
-        return <Message username={username} message={message} />;
-      })}
+      <FlipMove>
+        {/* message themselves */}
+        {messages.map(({ id, message }) => {
+          return <Message key={id} username={username} message={message} />;
+        })}
+      </FlipMove>
     </div>
   );
 }
