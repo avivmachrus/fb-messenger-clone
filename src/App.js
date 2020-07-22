@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Button, FormControl, InputLabel, Input } from "@material-ui/core";
+import { IconButton, FormControl, InputLabel, Input } from "@material-ui/core";
+import SendIcon from "@material-ui/icons/Send";
 import "./App.css";
 import Message from "./components/Message/Message";
 
@@ -53,21 +54,27 @@ function App() {
       <h2>Welcome {username}</h2>
 
       <form className="app_form">
-        <FormControl>
+        <FormControl className="app_formControl">
           {/* input field */}
-          <InputLabel>Enter a Message...</InputLabel>
-          <Input value={input} onChange={inputOnChange} />
+
+          <Input
+            className="app_input"
+            placeholder="Enter a message..."
+            value={input}
+            onChange={inputOnChange}
+          />
 
           {/* button */}
-          <Button
+          <IconButton
+            className="app_iconButton"
             variant="contained"
             disabled={!input}
             type="submit"
             color="primary"
             onClick={sendMessages}
           >
-            Send Message
-          </Button>
+            <SendIcon />
+          </IconButton>
         </FormControl>
       </form>
 
