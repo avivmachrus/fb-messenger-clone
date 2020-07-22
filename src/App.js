@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IconButton, FormControl, InputLabel, Input } from "@material-ui/core";
+import { IconButton, FormControl, Input } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import "./App.css";
 import Message from "./components/Message/Message";
@@ -47,6 +47,7 @@ function App() {
   return (
     <div className="App">
       <img
+        className="app_imgLogo"
         src="https://facebookbrand.com/wp-content/uploads/2018/09/Header-e1538151782912.png?w=100&h=100"
         alt="fb-messenger-logo"
       />
