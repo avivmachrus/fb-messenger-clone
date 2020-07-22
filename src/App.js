@@ -51,8 +51,10 @@ function App() {
         src="https://facebookbrand.com/wp-content/uploads/2018/09/Header-e1538151782912.png?w=100&h=100"
         alt="fb-messenger-logo"
       />
-      <h1>Hello Newbee</h1>
-      <h2>Welcome {username}</h2>
+      <h1>Hello World !!</h1>
+      <h2>
+        Welcome <span className="username_color">{username}</span>
+      </h2>
 
       <form className="app_form">
         <FormControl className="app_formControl">

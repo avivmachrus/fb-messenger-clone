@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.username_color {
+  color: #335498;
+}
+
 .app_imgLogo {
   margin-top: 15px;
 }
@@ -13,7 +17,7 @@
   z-index: 1;
   background-color: #e9e9eb;
   width: 90%;
-  margin: 20px 20px 0 20px;
+  margin: 20px;
 }
 
 .app_formControl {
