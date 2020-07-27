@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { IconButton, FormControl, Input } from "@material-ui/core";
+import { IconButton, FormControl, Input, Snackbar } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import "./App.css";
 import Message from "./components/Message/Message";
@@ -13,6 +13,18 @@ function App() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [username, setUsername] = useState("");
+
+  const [state, setState] = useState({
+    open: false,
+    vertical: "top",
+    horizontal: "left",
+  });
+
+  const { vertical, horizontal, open } = state;
+
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
 
   const sendMessages = (event) => {
     // all sendMessage logic goes here
@@ -28,6 +40,12 @@ function App() {
   };
 
   const inputOnChange = (event) => setInput(event.target.value);
+
+  useEffect(() => {
+    if (username) {
+      setState({ ...state, open: true });
+    }
+  }, [username]);
 
   // grab data from firebase
   useEffect(() => {
@@ -87,6 +105,15 @@ function App() {
           return <Message key={id} username={username} message={message} />;
         })}
       </FlipMove>
+
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose}
+        message={`Have a nice day ${username}`}
+        key={vertical + horizontal}
+      />
     </div>
   );
 }

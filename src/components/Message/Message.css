@@ -4,6 +4,16 @@
   width: fit-content;
 }
 
+.message_userName {
+  text-align: left;
+  font-size: 14px !important;
+  color: limegreen;
+  font-weight: 600 !important;
+  line-height: unset !important;
+  opacity: 0.8;
+  margin-bottom: 5px !important;
+}
+
 .message_user {
   margin-left: auto;
   color: white;
